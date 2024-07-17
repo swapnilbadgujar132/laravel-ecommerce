@@ -23,17 +23,18 @@ class CategoryController extends Controller
     }
     function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $data=$request->validate([
             'name' => 'required|unique:categories',
             'image' => 'required|image|mimes:jpg,png,jpeg|max:2096',
             'meta_keyword' => 'required',
-            'meta_description' => 'required'
+            'meta_description' => 'required',
         ]);
 
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('category', 'public');
+            $filename = $request->image->store('category', 'public');
         }
+
         $category = new Category();
         $category->image = $filename;
         $category->name = $request->name;
@@ -62,6 +63,10 @@ class CategoryController extends Controller
         $filename = '';
         if ($request->file('image')) {
             $filename = $request->file('image')->store('category', 'public');
+            $oldImagePath = storage_path('app/public/' . $category->image);
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
         } else {
             $filename = $category->image;
         }
@@ -77,9 +82,9 @@ class CategoryController extends Controller
     function delete($id): RedirectResponse
     {
         $category = Category::findOrFail($id);
-        $path = public_path('storage\\' . $category->image);
+        $path = storage_path('app/public/' . $category->image);
         if (File::exists($path)) {
-            File::delete($path);
+            unlink($path);
         }
         $category->delete();
         return redirect()->route('admin.category.index')->with('success', 'Category Delete successfully');

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Admin::factory(1)->create();
-
+        // Admin ::factory(1)->create();
         $this->call([
             ManageSitesTableSeeder::class,
             CategoriesTableSeeder::class,
@@ -25,3 +27,4 @@ class DatabaseSeeder extends Seeder
         // ]);
     }
 }
+

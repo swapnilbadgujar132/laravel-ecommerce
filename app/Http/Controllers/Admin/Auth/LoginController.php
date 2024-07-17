@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -68,7 +69,7 @@ class LoginController extends Controller
             $request->validate([
                 'password' => 'required|confirmed'
             ]);
-
+            
             // check if existing password is correct
             if (!Hash::check($request->existing_password, $admin->password)) {
                 return redirect()->back()->with('error', 'Existing password is incorrect');

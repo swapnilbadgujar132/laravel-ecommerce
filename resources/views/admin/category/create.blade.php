@@ -65,7 +65,7 @@
                                             <div class="form-group">
                                                 <label for="meta_keywords">Meta Keywords
                                                 </label>
-                                                <input type="text" name="meta_keyword" class="tags" id="meta_keywords"
+                                                <input type="text" name="meta_keyword" class="tags form-group" id="meta_keywords"
                                                     placeholder="Enter Meta Keywords" value="">
                                                 @error('meta_keyword')
                                                     <span class="text-danger">{{ $message }}</span>

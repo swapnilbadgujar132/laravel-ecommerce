@@ -18,11 +18,17 @@ class AdminFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' => 'Hilal Ahmad',
-            'email' => 'hilal@gmail.com',
-            'phone' => '894849484',
+            // 'username' => 'Hilal Ahmad',
+            // 'email' => 'hilal@gmail.com',
+            // 'phone' => '894849484',
+            // 'image' => 'https://laravel.com/img/logomark.min.svg',
+            // 'password' => Hash::make('hilal_ahmad'),
+
+            'username' => 'Swapnil badgujar',
+            'email' => 'swapnilbadgujar744@gmail.com',
+            'phone' => '7666617213',
             'image' => 'https://laravel.com/img/logomark.min.svg',
-            'password' => Hash::make('hilal_ahmad'),
+            'password' => Hash::make('swapnilbadgujar'),
         ];
     }
 }

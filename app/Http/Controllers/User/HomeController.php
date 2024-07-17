@@ -25,7 +25,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function index(): View
+   public function index()
     {
         $categories = Category::latest()->take(4)->get();
         $brands1 = Brand::limit(3)->latest()->get();
@@ -75,7 +75,7 @@ class HomeController extends Controller
         ));
     }
 
-    function add_to_wishlist($id): RedirectResponse
+    public function add_to_wishlist($id): RedirectResponse
     {
         // instead of this
         $wishlist = Wishlist::where("user_id", auth()->id())->where("product_id", $id)->first();
@@ -95,7 +95,7 @@ class HomeController extends Controller
         }
     }
 
-    function add_to_compare($id): RedirectResponse
+    public function add_to_compare($id): RedirectResponse
     {
         $compare = Compare::whereUserIdAndProductId(auth()->id(), $id)->first();
         if ($compare) {
@@ -109,7 +109,7 @@ class HomeController extends Controller
         }
     }
 
-    function add_to_cart($id): RedirectResponse
+    public function add_to_cart($id): RedirectResponse
     {
         $product = Product::findOrFail($id);
         $cart = Cart::whereUserIdAndProductId(auth()->id(), $id)->first();
@@ -135,7 +135,7 @@ class HomeController extends Controller
         }
     }
 
-    function product_details($slug): View
+    public function product_details($slug): View
     {
         $product = Product::whereSlug($slug)->first();
         if ($product) {
@@ -146,7 +146,7 @@ class HomeController extends Controller
         }
     }
 
-    function shop(Request $request): View
+    public function shop(Request $request): View
     {
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
@@ -154,7 +154,7 @@ class HomeController extends Controller
         return view('user.shop', compact('categories', 'products', 'brands'));
     }
 
-    function search_product(Request $request)
+    public function search_product(Request $request)
     {
         $category = Category::whereSlug($request->slug)->first();
         $categories = Category::latest()->get();
@@ -163,7 +163,7 @@ class HomeController extends Controller
         return view('user.shop', compact('categories', 'products', 'brands'));
     }
 
-    function product_by_category($slug): View
+    public function product_by_category($slug): View
     {
         $category = Category::whereSlug($slug)->first();
         $categories = Category::latest()->get();
@@ -172,7 +172,7 @@ class HomeController extends Controller
         return view('user.shop', compact('categories', 'products', 'brands'));
     }
 
-    function product_by_sub_category($id, $cat_id): View
+    public function product_by_sub_category($id, $cat_id): View
     {
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
@@ -181,7 +181,7 @@ class HomeController extends Controller
     }
 
 
-    function product_by_child_category($id, $cat_id, $sub_id): View
+    public function product_by_child_category($id, $cat_id, $sub_id): View
     {
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
@@ -189,7 +189,7 @@ class HomeController extends Controller
         return view('user.shop', compact('categories', 'products', 'brands'));
     }
 
-    function product_by_brand($slug): View
+    public function product_by_brand($slug): View
     {
         $brand = Brand::whereSlug($slug)->first();
         $categories = Category::latest()->get();
@@ -198,19 +198,19 @@ class HomeController extends Controller
         return view('user.shop', compact('categories', 'products', 'brands'));
     }
 
-    function brands(): View
+    public function brands(): View
     {
         $brands = Brand::latest()->get();
         return view('user.brand', compact('brands'));
     }
 
-    function category(): View
+    public function category(): View
     {
         $categories = Category::latest()->get();
         return view('user.category', compact('categories'));
     }
 
-    function blog(): View
+    public function blog(): View
     {
         $blogs = Blog::latest()->get();
         $recent_blogs = Blog::limit(4)->latest()->get();
@@ -218,7 +218,7 @@ class HomeController extends Controller
         return view('user.blog', compact('blogs', 'categories', 'recent_blogs'));
     }
 
-    function blog_by_category($id): View
+    public function blog_by_category($id): View
     {
         $blogs = Blog::where('cat_id', $id)->latest()->get();
         $recent_blogs = Blog::where('cat_id', $id)->limit(4)->latest()->get();
@@ -227,7 +227,7 @@ class HomeController extends Controller
     }
 
 
-    function blog_details($id): View
+    public function blog_details($id): View
     {
         $blog = Blog::findOrFail($id);
         $recent_blogs = Blog::limit(4)->latest()->get();
@@ -235,7 +235,7 @@ class HomeController extends Controller
         return view('user.blog-details', compact('blog', 'categories', 'recent_blogs'));
     }
 
-    function blog_search(Request $request): View
+    public function blog_search(Request $request): View
     {
         $blogs = Blog::where('title', 'LIKE', '%' . $request->search . '%')->orWhere('title', 'LIKE', '%' . $request->search . '%')->latest()->get();
         $recent_blogs = Blog::limit(4)->latest()->get();
@@ -244,19 +244,19 @@ class HomeController extends Controller
     }
 
 
-    function faq_category(): View
+    public function faq_category(): View
     {
         $faq_categories = FaqCategory::latest()->get();
         return view('user.faq-category', compact('faq_categories'));
     }
 
-    function faq_by_category($slug): View
+    public function faq_by_category($slug): View
     {
         $faqcategory  = FaqCategory::where('slug',$slug)->first();
         return view('user.faqs', compact('faqcategory'));
     }
 
-    function subscribe(Request $request): RedirectResponse
+    public function subscribe(Request $request): RedirectResponse
     {
         $validate = $request->validate([
             'email' => 'required|email|exists:subscribes'
@@ -265,12 +265,12 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Subscribe successfully');
     }
 
-    function contact(): View
+    public function contact(): View
     {
         return view('user.contact');
     }
 
-    function save_contact(Request $request): RedirectResponse
+    public function save_contact(Request $request): RedirectResponse
     {
         $validate = $request->validate([
             'first_name' => 'required',
@@ -283,7 +283,7 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Contact save successfully');
     }
 
-    function review(Request $request)
+    public function review(Request $request)
     {
         $validate = $request->validate([
             'name' => 'required',
