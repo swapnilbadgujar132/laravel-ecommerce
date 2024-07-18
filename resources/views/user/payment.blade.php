@@ -40,8 +40,7 @@
                             <div class="col-12">
                                 <div class="payment-methods">
                                     <div class="single-payment-method">
-                                        <a class="text-decoration-none " href="#" data-bs-toggle="modal"
-                                            data-bs-target="#stripe">
+                                        <a class="text-decoration-none" href="{{route("stripe.show")}}">
                                             <img class=""
                                                 src="https://geniusdevs.com/codecanyon/omnimart40/assets/images/1601930611stripe-logo-blue.png"
                                                 alt="Stripe" title="Stripe">
@@ -113,7 +112,7 @@
                             <div class="modal-body">
                                 <div class="card-body">
                                     <div class="card-wrapper"></div>
-                                    <form role="form" action="{{ route('user.checkout.stripe') }}" method="post"
+                                    {{-- <form role="form" action="{{ route("user.checkout.stripe") }}" method="post"
                                         class="require-validation" data-cc-on-file="false"
                                         data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                         @csrf
@@ -143,7 +142,7 @@
                                             <button class="btn btn-primary btn-sm" type="submit"><span>Chekout With
                                                     Stripe</span></button>
                                         </div>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>

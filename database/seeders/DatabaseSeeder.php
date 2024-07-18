@@ -19,6 +19,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ManageSitesTableSeeder::class,
             CategoriesTableSeeder::class,
+            BrandsTableSeeder::class,
+            ServicesTableSeeder::class,
+            ServicesTableSeeder::class,
+            SliderTableSeeder::class,
         ]);
 
         // \App\Models\User::factory()->create([

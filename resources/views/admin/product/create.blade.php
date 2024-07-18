@@ -199,7 +199,8 @@
 
                                     <div class="form-group">
                                         <label for="childcategory_id">Select Child Category </label>
-                                        <select name="child_cat_id" id="childcategory_id" class="form-control">
+                                        <select name="child_cat_id" id="childcategory_id"
+                                         class="form-control">
                                             <option value="">Select One</option>
                                         </select>
                                         @error('child_cat_id')
@@ -219,6 +220,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="card">

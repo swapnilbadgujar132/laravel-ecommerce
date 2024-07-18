@@ -46,7 +46,11 @@
                                 </div>
                                 {{-- <input type="checkbox" class="checkbox" name="" id="show-password-checkbox"> <label for="show-password-checkbox">Show password</label> --}}
                             </div>
-                            <div class="col-12 text-center">
+
+                            <div class="col-6 text-center">
+                              <a href="{{route('password.request')}}">Reset Password</a>
+                            </div>
+                            <div class="col-6 text-center">
                                 <button class="btn btn-primary margin-bottom-none"
                                     type="submit"><span>Login</span></button>
                             </div>

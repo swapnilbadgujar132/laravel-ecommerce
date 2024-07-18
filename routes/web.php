@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\CartController;
@@ -22,6 +23,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email', function ($message) {
+        $message->to('swapnilbadgujar744@gmail.com')
+                ->subject('Test Email');
+    });
+    return 'Email sent!';
+});
+
 Route::middleware(['guest'])->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('/register', 'index')->name('user.register');
@@ -31,6 +43,14 @@ Route::middleware(['guest'])->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('/login', 'index')->name('user.login');
         Route::post('/login', 'login')->name('user.make.login');
+        Route::get('/forgot-password', function () {
+            return view('user.auth.forgot-password');
+        })->name('password.request');   
+        Route::post('forgot-password', 'ForgetPassword')->name('forgot-password');  
+        Route::get('/reset-password/{token}', function (string $token) {
+            return view('user.auth.reset-password', ['token' => $token]);
+        })->name('password.reset');
+        Route::post('reset-password', 'ResetPassword')->name('reset-password');  
     });
 });
 
@@ -63,6 +83,7 @@ Route::controller(HomeController::class)->group(function () {
         Route::get('/add_to_cart/{id}', 'add_to_cart')->name('user.add_to_cart');
     });
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::controller(CartController::class)->group(function () {
         Route::get('/cart', 'index')->name('user.cart');
@@ -89,6 +110,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/stripe', 'stripePost')->name('user.checkout.stripe');
     });
 
+   
+    // Route::get('/stripe', [CheckoutController::class,'stripe'])->name('stripe.show');
+
+
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('user.dashboard');
         Route::get('/profile', 'show_profile')->name('user.dashboard.profile');
@@ -97,6 +122,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/address', 'update_address')->name('user.address.update');
         Route::get('/logout', 'logout')->name('user.logout');
     });
+});
+
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe')->name('stripe.show');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
 });
 
 require_once 'admin.php';

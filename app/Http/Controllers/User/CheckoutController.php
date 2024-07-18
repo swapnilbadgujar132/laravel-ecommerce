@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\StripePaymentController;
+
 use App\Http\Controllers\Controller;
 use App\Models\BillingAddress;
 use App\Models\Cart;
@@ -11,6 +13,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stripe;
+use Session;
+
 
 class CheckoutController extends Controller
 {
@@ -101,7 +105,7 @@ class CheckoutController extends Controller
         return redirect()->route('user.order')->with('success', 'Order place successfully');
     }
 
-    function order()
+    public function order()
     {
         $orders = Order::whereUserId(auth()->id())->latest()->get();
         return view('user.order', compact('orders'));
@@ -179,4 +183,10 @@ class CheckoutController extends Controller
 
         return redirect()->route('user.order')->with('success', 'Order place successfully');
     }
+
+    public function stripe()
+    {
+        return view('User.stripe');
+    }
+
 }

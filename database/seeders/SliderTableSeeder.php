@@ -7,7 +7,7 @@ use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SliderSeed extends Seeder
+class SliderTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

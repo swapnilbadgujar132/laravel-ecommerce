@@ -1,1 +1,29 @@
-seeding Create for all main-main tables...
+
+3.security All Fitures 
+
+*Authorization 
+*Encryption 
+*Rate Limiting
+*Secure Headers
+*Content Security Policy
+*HTTPS 
+*Environment Configuration
+*Email Verification
+*Security Middleware
+*Password Reset Tokens
+*Session Security
+*Hiding Sensitive Routes 
+*Database Security
+*Disable Directory Listings
+
+
+4.table se data delete hogaya he ab muze all data firse chahiye .  
+
+**soft delete --DONE**
+**seeding work remeining...
+
+5.Password reset 
+6.Payment getaway Api etc 
+7.product tracking Api etc 
+8.Notification
+

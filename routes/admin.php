@@ -18,14 +18,14 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
     Route::middleware(['guest:admin'])->group(function () {
         Route::controller(LoginController::class)->group(function () {
             Route::get('/auth/login', 'index')->name('admin.auth.login');
             Route::post('/auth/login', 'login')->name('admin.auth.make.login');
         });
     });
-    
+
     Route::middleware(['auth:admin'])->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
