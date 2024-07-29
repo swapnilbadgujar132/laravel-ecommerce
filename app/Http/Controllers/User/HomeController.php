@@ -29,13 +29,13 @@ class HomeController extends Controller
     {
         $categories = Category::latest()->take(4)->get();
         $brands1 = Brand::limit(3)->latest()->get();
-        $brands2 = Brand::latest()->get();
+        // $brands2 = Brand::latest()->get();
 
         // Access individual categories as needed
         $categories1 = $categories->get(0);
-        $categories2 = $categories->get(1);
-        $categories3 = $categories->get(2);
-        $categories4 = $categories->get(3);
+        // $categories2 = $categories->get(1);
+        // $categories3 = $categories->get(2);
+        // $categories4 = $categories->get(3);
 
 
         $categories = Category::latest()->get();
@@ -58,10 +58,10 @@ class HomeController extends Controller
         $four_three_column_value = json_decode($four_three->value);
         return view('user.home', compact(
             'categories1',
-            'categories2',
-            'categories3',
-            'categories4',
-            'brands2',
+            // 'categories2',
+            // 'categories3',
+            // 'categories4',
+            // 'brands2',
             'brands1',
             'categories',
             'services',
@@ -161,6 +161,25 @@ class HomeController extends Controller
         $brands = Brand::latest()->get();
         $products = Product::where('cat_id', $category->id)->where('name', 'LIKE', '%' . $request->search . '%')->latest()->get();
         return view('user.shop', compact('categories', 'products', 'brands'));
+    }
+
+      public function SearchProduct(Request $request){
+        if ($request->ajax() ) {
+           $search =$request->enterKey;
+          $ProductSearch = Product::whereRAW("name LIKE ?",["%{$search}%"])->get();
+          $output="";
+          if ($ProductSearch->isEmpty()) {
+           $output = "No data found";
+          }
+          foreach ($ProductSearch as $key => $value) {
+            $output.= 
+            "<li style='list-style-type: none;'  data-search='$value->name' class='search-value'>
+             $value->name
+             </li>";
+          }
+
+          return $output;
+        }
     }
 
     public function product_by_category($slug): View

@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\StripePaymentController;
-
-use App\Http\Controllers\Controller;
-use App\Models\BillingAddress;
+use PDF; 
+use Stripe;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Transaction;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Models\BillingAddress;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use App\Jobs\pdfGenerate;
+use App\Models\Product;
+use Illuminate\Queue\Jobs\Job;
 use Illuminate\Support\Facades\Auth;
-use Stripe;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Stripe\Charge;
 
+use function PHPUnit\Framework\fileExists;
+use function PHPUnit\Framework\isNull;
 
 class CheckoutController extends Controller
 {
@@ -100,9 +106,36 @@ class CheckoutController extends Controller
         $transaction->total_amount = $total_amount;
         $transaction->save();
 
-        Cart::whereUserId(auth()->id())->delete();
+         // return   $order;
+         $user_data= $order->users;
+         $string = $order->product_id;
+         $products = json_decode($string, true);
+         $product_data=[];
+         foreach ($products as $key => $product) {
+            $data = Product::findorfail($product);
+            $product_data[]= $data;
+         }
 
+        pdfGenerate::dispatch($order,$user_data,$product_data);
+
+        Cart::whereUserId(auth()->id())->delete();
         return redirect()->route('user.order')->with('success', 'Order place successfully');
+    }
+
+    
+    public function orderCancel($uuid)
+    {
+        if ($uuid == '0') {
+            return redirect()->back()->with('error', 'Order cancellation unsuccessful');
+        }
+
+        $delete = Order::where('uuid', $uuid)->delete();
+
+        if ($delete) {
+            return redirect()->back()->with('success', 'Order cancelled successfully');
+        } else {
+            return redirect()->back()->with('error', 'Order cancellation failed');
+        }
     }
 
     public function order()
@@ -113,44 +146,47 @@ class CheckoutController extends Controller
 
     public function stripePost(Request $request)
     {
-        $total_amount = Cart::whereUserId(auth()->id())->sum('sub_total');
+        // $total_amount = Cart::whereUserId(auth()->id())->sum('sub_total');
 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $charge = Stripe\Charge::create([
-            "amount" => 100 * $total_amount,
+            "amount" => 100 * 100,
             "currency" => "usd",
             "source" => $request->stripeToken,
             "description" => "Payment Successfully From " . Auth::user()->name,
         ]);
-        if ($charge->status) {
 
-            $order = new Order();
-            $transaction = new Transaction();
-            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            $randomString = substr(str_shuffle($characters), 0, 10);
+        Session::flash('success' ,'payment succesfully');
+        return back();
+        // if ($charge->status) {
 
-            $product_ids = Cart::whereUserId(auth()->id())->pluck('product_id');
-            $order->uuid = $randomString;
-            $order->transaction_id = $charge->id;
-            $order->user_id = auth()->id();
-            $order->total_amount = $total_amount;
-            $order->payment_status = $charge->status == 'succeeded' ? 'paid' : 'unpaid';
-            $order->order_status = 'pending';
-            $order->product_id = json_encode($product_ids);
-            $order->payment_method = $request->payment_method;
-            $order->save();
+        //     $order = new Order();
+        //     $transaction = new Transaction();
+        //     $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        //     $randomString = substr(str_shuffle($characters), 0, 10);
 
-            $transaction->order_id = $order->uuid;
-            $transaction->user_id = auth()->id();
-            $transaction->payment_status = $charge->status == 'succeeded' ? 'paid' : 'unpaid';
-            $transaction->order_status = 'pending';
-            $transaction->total_amount = $total_amount;
-            $transaction->save();
+        //     $product_ids = Cart::whereUserId(auth()->id())->pluck('product_id');
+        //     $order->uuid = $randomString;
+        //     $order->transaction_id = $charge->id;
+        //     $order->user_id = auth()->id();
+        //     $order->total_amount = $total_amount;
+        //     $order->payment_status = $charge->status == 'succeeded' ? 'paid' : 'unpaid';
+        //     $order->order_status = 'pending';
+        //     $order->product_id = json_encode($product_ids);
+        //     $order->payment_method = $request->payment_method;
+        //     $order->save();
 
-            Cart::whereUserId(auth()->id())->delete();
+        //     $transaction->order_id = $order->uuid;
+        //     $transaction->user_id = auth()->id();
+        //     $transaction->payment_status = $charge->status == 'succeeded' ? 'paid' : 'unpaid';
+        //     $transaction->order_status = 'pending';
+        //     $transaction->total_amount = $total_amount;
+        //     $transaction->save();
 
-            return redirect()->route('user.order')->with('success', 'Order place successfully');
-        }
+        //     Cart::whereUserId(auth()->id())->delete();
+
+        //     return redirect()->route('user.order')->with('success', 'Order place successfully');
+        // }
     }
 
     function checkout_submit_back_transfer(Request $request)
@@ -178,15 +214,35 @@ class CheckoutController extends Controller
         $transaction->order_status = 'pending';
         $transaction->total_amount = $total_amount;
         $transaction->save();
+        
+        dd($transaction);
+        // product details 
+        // user ditals
+
+        $pdf = PDF::loadView('invoices.invoice', $data);
+
+        // Download the PDF file
+        return $pdf->download('invoice.pdf');
 
         Cart::whereUserId(auth()->id())->delete();
 
         return redirect()->route('user.order')->with('success', 'Order place successfully');
     }
 
+    
     public function stripe()
     {
-        return view('User.stripe');
+        return  view('User.stripe');
     }
 
+    public function generateInvoice($orderuuid)
+    {
+        $pdfFile='invoices/invoice-'.$orderuuid.'.pdf';
+        if (Storage::exists($pdfFile)) {
+          return response()->download(Storage::path($pdfFile));
+        } else {
+           return response()->json(['error'=>'File Not Found'],404);
+        }
+        
+    }
 }

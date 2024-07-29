@@ -125,7 +125,31 @@
         }
     </script>
 
-    @if (session()->has('success'))
+
+@if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'error!',
+            text: '{{ session('error') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
+    {{-- @if (session()->has('success'))
         <script>
             toastr["success"]("{{ session('success') }}")
         </script>
@@ -133,7 +157,7 @@
         <script>
             toastr["error"]("{{ session('error') }}")
         </script>
-    @endif
+    @endif --}}
 
     @yield('footer')
 </body>

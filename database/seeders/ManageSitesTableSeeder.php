@@ -24,7 +24,7 @@ class ManageSitesTableSeeder extends Seeder
             [
                 'id' => 2,
                 'key' => 'basic_setting',
-                'value' => '{"app_name":"Pakistan Online Store ( Online Bazaar )","home_page_title":"Pakistan Online Store ( Online Bazaar )"}',
+                'value' => '{"app_name":"india Online Store ( Online Bazaar )","home_page_title":"india Online Store ( Online Bazaar )"}',
                 'created_at' => '2023-08-29 13:33:05',
                 'updated_at' => '2023-08-30 18:39:15',
             ],
@@ -52,14 +52,14 @@ class ManageSitesTableSeeder extends Seeder
             [
                 'id' => 6,
                 'key' => 'footer',
-                'value' => '{"address":null,"phone":"03179974132","email":"hilal.ahmad.developer@gmail.com","copyright":"https://localhost:900","facebook":"hilal.ahmad.developer@gmail.com","twitter":"hilal.ahmad.developer@gmail.com","youtube":"hilal.ahmad.developer@gmail.com","linkedin":"hilal.ahmad.developer@gmail.com"}',
+                'value' => '{"address":null,"phone":"03179974132","email":"swapnil.developer@gmail.com","copyright":"https://localhost:900","facebook":"swapnil.developer@gmail.com","twitter":"hilal.ahmad.developer@gmail.com","youtube":"hilal.ahmad.developer@gmail.com","linkedin":"hilal.ahmad.developer@gmail.com"}',
                 'created_at' => '2023-08-30 20:02:00',
                 'updated_at' => '2023-08-31 13:34:04',
             ],
             [
                 'id' => 11,
                 'key' => 'first_three_column',
-                'value' => '{"image1":"home_page/gIZEzIf3tBewMdUroXLATAsDSjAorwQT4u3AXVeS.jpg","image2":"home_page/35pza28WZDosBBGsQcP4tkLuiTcxbsw7XCluGtXu.jpg","image3":"home_page/XCLHBladM8FBp7AJ7lhBs3ItkuS8BC8FaJCkoJx5.jpg","title1":"Reprehenderit impedi","title2":"Recusandae Do qui l","sub_title1":"Perspiciatis odio e","sub_title2":"Sit expedita eu fugi","url1":"Est consequatur ipsa","title3":"Nihil quod unde volu","sub_title3":"Magna tempora ipsum","url3":"Qui sit aspernatur","url2":"Ipsam dolorem nobis"}',
+                'value' => '{"image1":"assets/images/24gX1111.jpg","image2":"assets/images/24gX1111.jpg","image3":"assets/images/24gX1111.jpg","title1":"Reprehenderit impedi","title2":"Recusandae Do qui l","sub_title1":"Perspiciatis odio e","sub_title2":"Sit expedita eu fugi","url1":"Est consequatur ipsa","title3":"Nihil quod unde volu","sub_title3":"Magna tempora ipsum","url3":"Qui sit aspernatur","url2":"Ipsam dolorem nobis"}',
                 'created_at' => '2023-08-31 13:36:27',
                 'updated_at' => '2023-08-31 20:13:04',
             ],

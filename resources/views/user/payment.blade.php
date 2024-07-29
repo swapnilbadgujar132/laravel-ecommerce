@@ -40,7 +40,9 @@
                             <div class="col-12">
                                 <div class="payment-methods">
                                     <div class="single-payment-method">
-                                        <a class="text-decoration-none" href="{{route("stripe.show")}}">
+                                        <a class="text-decoration-none" href="{{route("stripe.post")}}" >
+                                            {{-- data-bs-toggle="modal"
+                                            data-bs-target="#stripe" --}}
                                             <img class=""
                                                 src="https://geniusdevs.com/codecanyon/omnimart40/assets/images/1601930611stripe-logo-blue.png"
                                                 alt="Stripe" title="Stripe">
@@ -48,25 +50,49 @@
                                         </a>
                                     </div>
                                     <div class="single-payment-method">
-                                        <a class="text-decoration-none " href="#" data-bs-toggle="modal"
-                                            data-bs-target="#bank">
+                                        {{-- href="{{route("phonepay.index")}}" --}}
+                                        <a class="text-decoration-none" href="{{route("phonepay.index")}}">
+                                        {{-- <a class="text-decoration-none " href="#" data-bs-toggle="modal" data-bs-target="#bank"> --}}
                                             <img class=""
-                                                src="https://geniusdevs.com/codecanyon/omnimart40/assets/images/1638530860pngwing.com (1).png"
-                                                alt="Bank Transfer" title="Bank Transfer">
-                                            <p>Bank Transfer</p>
+                                                src="https://pbs.twimg.com/profile_images/1615271089705463811/v-emhrqu_400x400.png"
+                                                alt="Phone pay" title="Phone pay">
+                                            <p>Phone Pay</p>
                                         </a>
                                     </div>
-
                                    
-                                    <div class="single-payment-method">
+                                    {{-- <div class="single-payment-method">
                                         <a class="text-decoration-none " href="#" data-bs-toggle="modal"
                                             data-bs-target="#cod">
                                             <img class=""
                                                 src="https://support.sitegiant.com/wp-content/uploads/2022/08/cash-on-delivery-banner.png"
                                                 alt="Flutter Wave" title="Flutter Wave">
                                             <p>Cash on Delivery</p>
+                                            
                                         </a>
+                                    </div> --}}
+
+                                    <div class="single-payment-method">
+                                        <form id="myForm" action="{{ route('paypal') }}" method="post">
+                                            @csrf
+                                            @php
+                                            $total_cart = \App\Models\Cart::whereUserId(auth()->id())->sum('sub_total');
+                                            $carts = \App\Models\Cart::whereUserId(auth()->id())->latest()->get();
+                                            @endphp
+                                            <input type="hidden" name="price" value="{{$total_cart + 20}}">
+                                            @foreach ($carts as $cart)
+                                            <input type="hidden" name="product_name[]" value="{{$cart->product->name}}">
+                                            @endforeach
+                                            
+                                            <input type="hidden" name="quantity" value="1">
+                                            <a  href="javascript:document.getElementById('myForm').submit();" type="submit">
+                                                    <img class=""
+                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJpLqlFV4Amm4_3c-qYdNyH8-GFNFozSF0NY3IVh-Av1EtDl6LG4PlbHNNAbkMo86MTk&usqp=CAU"
+                                                    alt="paypal" title="paypal">
+                                                <p>paypal</p>
+                                            </a>
+                                        </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -179,6 +205,7 @@
                         </div>
                     </form>
                 </div>
+
                 <!-- Modal bank -->
                 <div class="modal fade" id="bank" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">

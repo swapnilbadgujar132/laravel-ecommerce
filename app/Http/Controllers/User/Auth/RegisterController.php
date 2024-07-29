@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\BillingAddress;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ class RegisterController extends Controller
         $user->phone = $request->phone;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+        $user->email_verified_at = Carbon::now();
         $user->photo = "null";
         $user->password = Hash::make($request->password);
         $user->save();

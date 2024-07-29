@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="container padding-bottom-3x mb-1">
         <div class="row">
             @include('includes.user-sidebar')
@@ -32,6 +32,8 @@
                                         <th>Order Status</th>
                                         <th>Payment Status</th>
                                         <th>Date Purchased</th>
+                                        <th>Download Invoice</th>
+                                        <th>Cancel order </th>
                                         {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
@@ -52,6 +54,12 @@
                                         </td>
 
                                         <td>{{ \Carbon\Carbon::now()->format('D/M/Y',strtotime($order->created_at)) }}</td>
+                                        <td>
+                                            <a href="{{route("generateInvoice",$order->uuid)}}">Download</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('user.checkout.order.cancel', $order->uuid ?? 0 ) }}">Cancel Order</a>
+                                        </td>
                                         {{-- <td>
                                             <a href="https://geniusdevs.com/codecanyon/omnimart40/user/order/invoice/155"
                                                 class="btn btn-info btn-sm">Invoice</a>

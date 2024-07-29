@@ -3,7 +3,7 @@
     Home
 @endsection
 @section('content')
-    <div class="slider-area-wrapper">
+    <div class="slider-area-wrapper" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -153,7 +153,6 @@
         </div>
     </div>
 
-
     <div class="bannner-section mt-60">
         <div class="container ">
             <div class="row gx-3">
@@ -188,7 +187,7 @@
         </div>
     </div>
 
-    <div class="deal-of-day-section mt-20">
+    {{-- <div class="deal-of-day-section mt-20">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -531,6 +530,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 @endsection

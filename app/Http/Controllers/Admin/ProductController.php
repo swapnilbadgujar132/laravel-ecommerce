@@ -29,8 +29,6 @@ class ProductController extends Controller
     }
     function store(Request $request): RedirectResponse
     {
-
-
         $request->validate([
             'name' => 'required|unique:products',
             'featured_image' => 'required|image|mimes:jpg,png,jpeg|max:2096',

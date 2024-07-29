@@ -17,7 +17,7 @@
                 <tbody>
                     <tr>
                         <td>Cart Subtotal:</td>
-                        <td class="text-gray-dark">$ {{ $total_cart }}</td>
+                        <td class="text-gray-dark">${{ $total_cart }}</td>
                     </tr>
                     <tr>
                         <td>Shipping:</td>
@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <td class="text-lg text-primary">Order total</td>
-                        <td class="text-lg text-primary grand_total_set">$ {{ $total_cart - 20 }}</td>
+                        <td class="text-lg text-primary grand_total_set">${{ $total_cart + 20 }}</td>
                     </tr>
                 </tbody>
             </table>

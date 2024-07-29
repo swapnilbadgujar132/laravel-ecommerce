@@ -20,10 +20,54 @@
 4.table se data delete hogaya he ab muze all data firse chahiye .  
 
 **soft delete --DONE**
+
 **seeding work remeining...
+**password reset code work remeining (email not send)...
+**daily backup file not create...
+**form not submited
+**
 
 5.Password reset 
 6.Payment getaway Api etc 
 7.product tracking Api etc 
 8.Notification
 
+place order successfilly then invice genrate...DONE
+
+
+order cancel option create
+list delete...
+
+search karun product show 
+
+
+mail send then click  btn then me redirectb on 
+password reset page and then  
+
+reset password STEPS
+
+*Email valid or not.
+*laravel check all those information reset Password time.
+*email page costume.
+php artisan vendor:publish --tag=laravel-mail thisn comand laravel email page custmise functionality given .
+
+1.link reset password page this page only insert a -- email Address. then submit time Laravel Check Email valid or not.
+2.gmail opn and click reset Password btn the we redirect On password change page .
+this page we are 
+:insert new password tow time & email 
+:click reset Password times create a new token this token use for form input fild But this input fild is hidden
+:laravel check all those information is currect then he is redirect on login page.
+
+
+
+*email page costume.
+php artisan vendor:publish --tag=laravel-mail thisn comand laravel email page custmise functionality given .
+
+
+
+*Today TASK*
+
+1.Shop Categories -- T-shirts AND Cricket Bats 
+2.using siding All Product showing user AND ALL .
+3.Brand Name change...
+4.

@@ -9,6 +9,8 @@ use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\PaypalController;
+use App\Http\Controllers\user\phonepayController;
 use App\Http\Controllers\User\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,15 +26,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
 
-Route::get('/test-email', function () {
-    Mail::raw('This is a test email', function ($message) {
-        $message->to('swapnilbadgujar744@gmail.com')
-                ->subject('Test Email');
-    });
-    return 'Email sent!';
-});
+// Route::get('test', function () {
+//     Mail::raw('This is a test email', function ($message) {
+//         $message->to('swapnilbadgujar744@gmail.com')
+//                 ->subject('Test Email');
+//     });
+//     return 'Email sent!';
+// });
 
 Route::middleware(['guest'])->group(function () {
     Route::controller(RegisterController::class)->group(function () {
@@ -70,7 +72,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/faq/{slug}', 'faq_by_category')->name('user.faqs');
     Route::get('/price/product', 'product_by_price')->name('user.product.price');
     Route::get('/category', 'category')->name('user.category');
+
     Route::get('/search', 'search_product')->name('user.search.product');
+    Route::get('SearchProduct','SearchProduct')->name('SearchProduct');
+    Route::get('ProductShow','ProductShow')->name('ProductShow');
+
     Route::get('/category/product/{slug}', 'product_by_category')->name('user.category.product');
     Route::get('/brand/product/{slug}', 'product_by_brand')->name('user.brand.product');
     Route::get('/brand', 'brands')->name('user.brand');
@@ -107,9 +113,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/order', 'order')->name('user.order');
         Route::post('/checkout/cash-on-delivery', 'checkout_submit_cash_on_delivery')->name('user.checkout.cash.on.delivery');
         Route::post('/checkout/bank-transfer', 'checkout_submit_back_transfer')->name('user.checkout.bank.transfer');
-        Route::post('/stripe', 'stripePost')->name('user.checkout.stripe');
-    });
 
+        Route::get('order/orderCancel/{id}', 'orderCancel')->name('user.checkout.order.cancel');
+
+        // Route::post('/stripe', 'stripePost')->name('user.checkout.stripe');
+        Route::get('/generateInvoice/{userid}', 'generateInvoice')->name('generateInvoice');
+
+        Route::get('/stripe', 'stripe')->name('stripe.show');
+        Route::get('/upi', 'upi')->name('upi.pyament');
+
+        Route::post('/stripe', 'stripePost')->name('stripe.post');
+        Route::get('generateInvoice/{orderId}','generateInvoice')->name('generateInvoice');
+    });
    
     // Route::get('/stripe', [CheckoutController::class,'stripe'])->name('stripe.show');
 
@@ -124,10 +139,21 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-
-Route::controller(StripePaymentController::class)->group(function(){
-    Route::get('stripe', 'stripe')->name('stripe.show');
-    Route::post('stripe', 'stripePost')->name('stripe.post');
+Route::controller(phonepayController::class)->group( function(){
+    Route::get('phonepay','phonepay')->name('phonepay.index')->middleware('throttle:60,1');
+    Route::any('phonepay-response','response')->name("response");
 });
+
+Route::controller(PaypalController::class)->group( function(){
+    Route::post('/paypal', 'paypal')->name('paypal');
+    Route::get('/success', 'success')->name('paypal.success');
+    Route::get('/cancel', 'cancel')->name('paypal.cancel');
+    // Route::any('phonepay-response','response')->name("response");
+});
+
+
+Route::get('/succesful', function () {
+   return view('temp');
+})->name('temp');
 
 require_once 'admin.php';

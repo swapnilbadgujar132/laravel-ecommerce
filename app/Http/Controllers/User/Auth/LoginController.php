@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 
 
@@ -36,6 +40,10 @@ class LoginController extends Controller
             'password_login.min' => 'The password must be at least 8 characters long.',
         ]);
         $user = Auth::attempt(['email' => $request->email_login, 'password' => $request->password_login]);
+        
+        //  $request->session()->flash('success', 'Operation was successful!');
+
+
         if ($user) {
             return redirect()->route('user.dashboard')->with('success', 'Login successfully');
         } else {
@@ -43,45 +51,51 @@ class LoginController extends Controller
         }
     }
 
-    public function ForgetPassword(Request $request){
+    public function ForgetPassword(Request $request)
+     {
         $request->validate(['email' => 'required|email']);
-
-        $status = Password::sendResetLink(
-            $request->only('email')
+        
+        $token = Str::random(60);
+        $email = $request->email;
+        
+        DB::table('password_reset_tokens')->updateOrInsert(
+            ['email' => $email],
+            ['token' => $token,
+             'created_at' => now()]
         );
-    
-        if ($status === Password::RESET_LINK_SENT) {
-            return back()->with('status', __($status));
-        } else {
-            return back()->withErrors(['email' => __($status)]);
-        }
-    }
-          
+
+        Mail::to($email)->send(new ResetPasswordMail($email, $token));
+        session()->flash('success', 'Password reset link has been sent to your email.');
+        return back();
+     }
+ 
     public function ResetPassword(Request $request){
-        $request->validate([
+        $data=$request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
-    
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password),
-                    'remember_token' => Str::random(60), // Use remember_token for password reset token
-                ])->save();
-                
-    
-                event(new PasswordReset($user));
-            }
-        );
-        if ($status === Password::PASSWORD_RESET) {
-            return redirect()->route('login')->with('status', __($status));
-        } else {
-            return back()->withErrors(['email' => [__($status)]]);
+        
+      $status = DB::table('password_reset_tokens')->whereRAW('email=? AND token=?',[$request->email,$request->token])->exists();
+        if ($status) {
+         $update = User::whereRAW('email = ?',[$request->email])->update([
+            'password'=>Hash::make($request->password),
+            'remember_token'=>Str::random(60),
+          ]);
+          session()->flash('successAlert', 'Password reset Succsefully.');
+          return redirect()->route('user.register');
         }
-       
+        else {
+            return back()->with(['error' => 'Unsuccesfully']);
     }
-    
-}
+}}
+
+
+
+
+
+
+
+
+
+

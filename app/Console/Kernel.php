@@ -18,6 +18,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('database:backup')->daily();
+        $schedule->command('auth:clear-resets')->everyFifteenMinutes();
+
         // $schedule->command('auth:clear-resets')->everyFifteenMinutes();
     }
 

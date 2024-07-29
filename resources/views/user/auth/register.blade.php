@@ -1,3 +1,7 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+</head>
 @extends('layouts.app')
 @section('title')
     Register
@@ -22,7 +26,7 @@
                 <div class="card register-area">
                     <div class="card-body ">
                         <h4 class="margin-bottom-1x text-center">Login</h4>
-                        <form class="row" action="{{ route('user.make.login') }}"
+                        <form class="row" id="loginSubmit" action="{{ route('user.make.login') }}"
                             method="POST">
                             @csrf
                             <div class="col-sm-12">
@@ -47,11 +51,11 @@
                                 {{-- <input type="checkbox" class="checkbox" name="" id="show-password-checkbox"> <label for="show-password-checkbox">Show password</label> --}}
                             </div>
 
-                            <div class="col-6 text-center">
-                              <a href="{{route('password.request')}}">Reset Password</a>
+                            <div class="col-6 text-end">
+                              <a class="btn btn-primary margin-bottom-none" href="{{route('password.request')}}">Reset Password</a>
                             </div>
-                            <div class="col-6 text-center">
-                                <button class="btn btn-primary margin-bottom-none"
+                            <div class="col-6 text-left">
+                                <button class="btn btn-primary margin-bottom-none" id="loginBtn"
                                     type="submit"><span>Login</span></button>
                             </div>
                         </form>
@@ -62,7 +66,7 @@
                 <div class="card register-area">
                     <div class="card-body ">
                         <h4 class="margin-bottom-1x text-center">Register</h4>
-                        <form class="row" action="{{ route('user.make.register') }}"
+                        <form class="row" id="" action="{{ route('user.make.register') }}"
                             method="POST">
                             @csrf
                             <div class="col-sm-6">
@@ -141,6 +145,27 @@
         showPasswordCheckbox.addEventListener('change', function () {
             passwordInput.type = this.checked ? 'text' : 'password';
         });
+
+
+    document.getElementById('loginBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Change Password !'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Proceed with the form submission or the action you want to perform
+            // For example:
+            document.getElementById('loginSubmit').submit();
+        }
+    });
+});
     </script>
     
     

@@ -21,6 +21,7 @@
     <meta name="author" content="Online Bazzar">
     <meta name="distribution" content="web">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Mobile Specific Meta Tag-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -54,9 +55,7 @@
 </head>
 <!-- Body-->
 
-<body class="
-body_theme1
-">
+<body class="body_theme1">
 
     <!-- Header-->
     <header class="site-header navbar-sticky">
@@ -106,10 +105,10 @@ body_theme1
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-between">
                             <!-- Logo-->
-                            <div class="site-branding"><a class="site-logo align-self-center"
+                            {{-- <div class="site-branding"><a class="site-logo align-self-center"
                                     href="/"><img
                                         src="{{ asset('storage') }}/{{ $media_value->logo }}"
-                                        alt="OmniMart"></a></div>
+                                        alt="OmniMart"></a></div> --}}
                             <!-- Search / Categories-->
                             <div class="search-box-wrap d-none d-lg-block d-flex">
                                 <form class="input-group" id="" action="{{ route('user.search.product') }}"
@@ -117,23 +116,65 @@ body_theme1
                                     <div class="search-box-inner align-self-center">
                                         <div class="search-box d-flex">
                                             <select name="slug" id="" class="categoris">
-                                                <option value="">All</option>
+                                                {{-- <option value="">All</option> --}}
                                                 @php
                                                     $categories = \App\Models\Category::latest()->get();
                                                 @endphp
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->slug }}">{{ $category->name }}
-                                                    </option>
+                                                    <option value="{{ $category->slug}}">{{ $category->name }}</option>
                                                 @endforeach
                                             </select>
                                             <span class="input-group-btn">
                                                 <button type="submit"><i class="icon-search"></i></button>
                                             </span>
                                             <input class="form-control" type="text"
-                                                id="" name="search"
+                                                id="search" name="search"
                                                 placeholder="Search by product name" required>
-                                            <div class="serch-result d-none">
+                                            <div class="serch-result d-none" id="result">
+
                                             </div>
+
+                                            <script>
+                                                $(document).ready(function() {
+                                                    $('#search').on('input',function(event) {
+                                                        var enterKey = $(this).val(); // Get the current value of the input field
+                                                        // result class remove d-none 
+                                                        if (enterKey == "") {
+                                                        $("#result").addClass("d-none");
+                                                        }else{
+                                                        $("#result").removeClass("d-none");
+                                                        }
+                                                        $.ajax({
+                                                         url:"{{route('SearchProduct')}}",
+                                                         type:'GET',
+                                                         data:{
+                                                            enterKey:enterKey,
+                                                         },
+                                                         success:function ( response ) {
+                                                            $("#result").html(response);
+                                                         },
+                                                        });
+                                                    });
+                                                });
+
+                                                $(document).on('click', '.search-value', function(event) {
+                                                var SearchValue = $(this).data('search'); // Retrieve the data-search attribute
+                                                $('#search').val(SearchValue);
+                                                $("#result").addClass("d-none"); // Optionally hide the result div after selection
+                                                
+                                                $SearchID=$(this).data('searchID');
+                                                $.ajax({
+                                                url:"{{route('ProductShow')}}",
+                                                type:"GET",
+                                                data:'{SearchID : SearchID}',
+                                                success:function (response) {
+                                                 
+                                                },
+                                                });
+                                                });
+                                                   
+                                               
+                                            </script>
                                         </div>
                                     </div>
                                 </form>
@@ -402,7 +443,6 @@ body_theme1
 
     </header>
     <!-- Page Content-->
-
     @yield('content')
 
 
@@ -563,14 +603,61 @@ body_theme1
         }
 </script>
 
+
+{{-- @if (session('a'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif --}}
+
+
+{{-- @if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif --}}
+
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'error!',
+            text: '{{ session('error') }}',
+            confirmButtonText: 'OK'
+        });
+    </script>
+@endif
+
+@if (session('pyamentSuccess'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Pyament is Succesfully!',
+        text: '{{ session('pyamentSuccess') }}',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif
+
 @if (session()->has('success'))
     <script>
         toastr['success']("{{ session('success') }}")
     </script>
-@elseif(session()->has('error'))
+{{-- @elseif(session()->has('error'))
 <script>
     toastr['error']("{{ session('error') }}")
-</script>
+</script> --}}
 @endif
 @yield('footer')
 </body>

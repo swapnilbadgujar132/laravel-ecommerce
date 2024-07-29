@@ -1,7 +1,6 @@
 
-ss
 
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Laravel 9 - Stripe Payment Gateway Integration Example - ItSolutionStuff.com</title>
@@ -165,4 +164,4 @@ $(function() {
      
 });
 </script>
-</html> --}}
+</html>
