@@ -33,11 +33,23 @@ To run this Laravel app, you need to have the following software installed on yo
     ```bash
     php artisan migrate
     ```
-7. Serve the application:
+7. Git File Changes :
+     ```bash
+    MAIL_USERNAME = MAIL_USERNAME
+    MAIL_PASSWORD = APP PASSWORD CREATE
+    MAIL_FROM_ADDRESS = GMAIL ADDRESS
+          &
+    PAYPAL_MODE = PAYPAL
+    PAYPAL_SANDBOX_CLIENT_ID = CLIENT_ID CREATE
+    PAYPAL_SANDBOX_CLIENT_SECRET =CLIENT_SECRET_ID CREATE
+    ```
+
+
+8. Serve the application:
     ```bash
     php artisan serve
     ```
-10. Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser to view the app.
+9. Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser to view the app.
 
 ## Contributing
 If you would like to contribute to this project feel free to do so...
