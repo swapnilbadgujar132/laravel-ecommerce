@@ -5,7 +5,7 @@
                
                 @if (Auth::user()->photo != "null")
                 <img id="avater_photo_view"
-                src="{{ asset('storage') }}/{{ Auth::user()->photo }}"
+                src="{{ asset('storage/profile') }}/{{ Auth::user()->photo }}"
                 />
                 @else
                        <img id="avater_photo_view"

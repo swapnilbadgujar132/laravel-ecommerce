@@ -36,7 +36,7 @@
                                     @foreach ($sliders as $slider)
                                     <tr>
                                         <td>
-                                            <img src="{{ asset('storage') }}/{{ $slider->image }}"
+                                            <img src="{{ asset('storage/slider') }}/{{ $slider->image }}"
                                                 alt="Image Not Found">
                                         </td>
                                         <td>

@@ -33,7 +33,7 @@
             <div class="entry">
                 <div class="entry-thumb"><a
                         href="{{ route('user.blog_details', ['id'=>$rblog->id]) }}"><img
-                            src="{{ asset('storage') }}/{{ $rblog->image }}"
+                            src="{{ asset('storage/blog') }}/{{ $rblog->image }}"
                             alt="Post"></a></div>
                 <div class="entry-content">
                     <h4 class="entry-title"><a

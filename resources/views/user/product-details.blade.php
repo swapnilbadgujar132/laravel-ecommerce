@@ -30,7 +30,7 @@
                     <div class="product-thumbnails insize">
                         <div class="">
                             <div class="item" style="position: relative; overflow: hidden;">
-                                <img src="{{ asset('storage') }}/{{ $product->featured_image }}" alt="zoom">
+                                <img src="{{ asset('storage/products') }}/{{ $product->featured_image }}" alt="zoom">
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                             <div class="product-card">
                                 <div class="product-thumb">
                                     <img class="lazy"
-                                        data-src="{{ asset('storage') }}/{{ $product1->featured_image }}"
+                                        data-src="{{ asset('storage/products') }}/{{ $product1->featured_image }}"
                                         alt="Product">
                                     <div class="product-button-group">
                                         @if (Auth::user() && Auth::user()->id)

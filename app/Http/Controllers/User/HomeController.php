@@ -41,6 +41,7 @@ class HomeController extends Controller
         $categories = Category::latest()->get();
         $services = Service::limit(4)->latest()->get();
         $blogs = Blog::limit(10)->latest()->get();
+        
         $sliders = Slider::limit(4)->latest()->get();
 
         $home_page = ManageSite::where('key', 'home_page')->first();
@@ -48,14 +49,14 @@ class HomeController extends Controller
         $first_three_column = ManageSite::where('key', 'first_three_column')->first();
         $first_three_column_value = json_decode($first_three_column->value);
 
-        $second_three_column = ManageSite::where('key', 'second_three_column')->first();
-        $second_three_column_value = json_decode($second_three_column->value);
+        // $second_three_column = ManageSite::where('key', 'second_three_column')->first();
+        // $second_three_column_value = json_decode($second_three_column->value);
 
-        $third_two_column = ManageSite::where('key', 'third_two_column')->first();
-        $third_two_column_value = json_decode($third_two_column->value);
+        // $third_two_column = ManageSite::where('key', 'third_two_column')->first();
+        // $third_two_column_value = json_decode($third_two_column->value);
 
-        $four_three = ManageSite::where('key', 'four_three_column')->first();
-        $four_three_column_value = json_decode($four_three->value);
+        // $four_three = ManageSite::where('key', 'four_three_column')->first();
+        // $four_three_column_value = json_decode($four_three->value);
         return view('user.home', compact(
             'categories1',
             // 'categories2',
@@ -68,9 +69,9 @@ class HomeController extends Controller
             'blogs',
             'home_page_value',
             'first_three_column_value',
-            'second_three_column_value',
-            'four_three_column_value',
-            'third_two_column_value',
+            // 'second_three_column_value',
+            // 'four_three_column_value',
+            // 'third_two_column_value',
             'sliders'
         ));
     }

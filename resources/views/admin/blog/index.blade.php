@@ -45,7 +45,7 @@
                                     @foreach ($blogs as $blog)
                                     <tr id="blog-bulk-delete">
                                         <td>
-                                            <img src="{{ asset('storage') }}/{{ $blog->image }}"
+                                            <img src="{{ asset('storage/blog') }}/{{ $blog->image }}"
                                                 alt="">
                                         </td>
                                         <td>

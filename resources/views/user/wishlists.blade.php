@@ -11,6 +11,7 @@
                         <li><a href="/">Home</a> </li>
                         <li class="separator"></li>
                         <li>Wishlist</li>
+
                     </ul>
                 </div>
             </div>
@@ -41,7 +42,7 @@
                                                 <div class="product-item"><a class="product-thumb"
                                                         href="{{ route('user.product_details', ['slug'=>$wishlist->product->slug]) }}">
                                                         <img
-                                                            src="{{ asset('storage') }}/{{ $wishlist->product->featured_image }}"
+                                                            src="{{ asset('storage/products') }}/{{ $wishlist->product->featured_image }}"
                                                             alt="Product"></a>
                                                     <div class="product-info">
                                                         <h4 class="product-title"><a

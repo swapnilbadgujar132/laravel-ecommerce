@@ -37,7 +37,7 @@
                                                 <label for="name">Set Image *</label>
                                                 <br>
                                                 @if ($brand->image)
-                                                    <img class="admin-img" src="{{ asset('storage') }}/{{ $brand->image }}"
+                                                    <img class="admin-img" src="{{ asset('storage/brand') }}/{{ $brand->image }}"
                                                         alt="{{ $brand->name }}">
                                                 @else
                                                     <img class="admin-img"

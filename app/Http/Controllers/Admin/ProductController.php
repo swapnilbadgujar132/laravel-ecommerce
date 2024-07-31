@@ -27,7 +27,8 @@ class ProductController extends Controller
         $brands = Brand::latest()->get();
         return view('admin.product.create', compact('categories', 'brands'));
     }
-    function store(Request $request): RedirectResponse
+    function store(Request $request)
+    // : RedirectResponse
     {
         $request->validate([
             'name' => 'required|unique:products',
@@ -35,7 +36,7 @@ class ProductController extends Controller
             'short_description' => 'required',
             'description' => 'required',
             'tags' => 'required',
-            // 'specifications' => 'required',
+            //'specifications' => 'required',
             'meta_keyword' => 'required',
             'meta_description' => 'required',
             'current_price' => 'required',
@@ -50,10 +51,13 @@ class ProductController extends Controller
 
         $filename = '';
         if ($request->file('featured_image')) {
-            $filename = $request->file('featured_image')->store('products', 'public');
+            $file = $request->file('featured_image');
+            $storefilename = $file->store('products','public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         }
-
-
+        
         $product = new Product();
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
@@ -105,7 +109,10 @@ class ProductController extends Controller
 
         $filename = '';
         if ($request->file('featured_image')) {
-            $filename = $request->file('featured_image')->store('products', 'public');
+            $storefilename = $request->file('featured_image')->store('products', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         } else {
             $filename = $product->featured_image;
         }
@@ -134,9 +141,9 @@ class ProductController extends Controller
     function delete($id): RedirectResponse
     {
         $product = Product::findOrFail($id);
-        $featured_image = public_path('storage\\' . $product->featured_image);
+        $featured_image = public_path('storage/products/' . $product->featured_image);
         foreach ($product->images as $img) {
-            $images = public_path('storage\\' . $img);
+            $images = public_path('storage/products/' . $img);
             if (File::exists($images)) {
                 File::delete($images);
             }

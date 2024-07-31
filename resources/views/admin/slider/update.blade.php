@@ -61,7 +61,7 @@
                                                         <label id="slider_text" for="name">Set Slider Image *</label>
                                                         <br>
                                                         <img class="admin-img"
-                                                            src="{{ asset('storage') }}/{{ $slider->image }}"
+                                                            src="{{ asset('storage/slider') }}/{{ $slider->image }}"
                                                             alt="No Image Found">
                                                         <br>
                                                         <span id="chenge_label2" class="mt-1">Image Size Should Be 968 x

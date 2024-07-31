@@ -6,7 +6,7 @@
         $setting_value=json_decode($settings->value);
     @endphp
         <a href="/" class="logo">
-            <img src="{{ asset('storage') }}/{{ $setting_value->logo }}"
+            <img src="{{ asset('storage/manage-site') }}/{{ $setting_value->logo }}"
                 alt="navbar brand" class="navbar-brand">
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -25,6 +25,7 @@
     <!-- End Logo Header -->
 
     <!-- Navbar Header -->
+    
     <nav class="navbar navbar-header navbar-expand-lg">
         <div class="container-fluid">
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -40,7 +41,7 @@
                     <a class="dropdown-toggle profile-pic" data-toggle="dropdown"
                         href="" aria-expanded="false">
                         <div class="avatar-sm avatar avatar-sm">
-                            <img src="{{ asset('storage') }}/{{ Auth::guard('admin')->user()->image }}"
+                            <img src="{{ asset('storage/profile') }}/{{ Auth::guard('admin')->user()->image }}"
                                 alt="..." class="avatar-img rounded-circle">
                         </div>
                     </a>
@@ -48,7 +49,7 @@
                         <li>
                             <div class="user-box">
                                 <div class="avatar-lg"><img
-                                        src="{{ asset('storage') }}/{{ Auth::guard('admin')->user()->image }}"
+                                        src="{{ asset('storage/profile') }}/{{ Auth::guard('admin')->user()->image }}"
                                         alt="image profile" class="avatar-img rounded"></div>
 
                                 <div class="u-text">

@@ -24,7 +24,13 @@ class DatabaseSeeder extends Seeder
             BrandsTableSeeder::class,
             ServicesTableSeeder::class,
             SliderTableSeeder::class,
+            subCategoryTableSeeder::class,
+            ChildCategoryTableSeeder::class,
+            productTableSeeder::class,
+            blogsCategoryTableSeeder::class,
+            blogsTableSeeder::class,
         ]);
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

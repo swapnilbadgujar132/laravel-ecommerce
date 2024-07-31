@@ -38,7 +38,7 @@
                                                 <label for="name">Current Image *</label>
                                                 <br>
                                                 <img class="admin-img"
-                                                    src="{{ asset('storage') }}/{{ $service->image }}"
+                                                    src="{{ asset('storage/service') }}/{{ $service->image }}"
                                                     alt="No Image Found">
                                                 <br>
                                                 <span class="mt-1">Image Size Should Be 65 x 65.</span>

@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class ManageSiteController extends Controller
 {
-    function index(): View
+    function index()
+    // : View
     {
         // $manage_site = new ManageSite();
         // $manage_site->key = "four_three_column";
@@ -36,21 +37,23 @@ class ManageSiteController extends Controller
         $media_setting = ManageSite::where('key', 'media')->first();
         $seo_setting = ManageSite::where('key', 'seo')->first();
         $first_three_column = ManageSite::where('key', 'first_three_column')->first();
-        $second_three_column = ManageSite::where('key', 'second_three_column')->first();
-        $third_two_column = ManageSite::where('key', 'third_two_column')->first();
-        $four_three_column = ManageSite::where('key', 'four_three_column')->first();
+//         $second_three_column = ManageSite::where('key', 'second_three_column')->first();
+        // $third_two_column = ManageSite::where('key', 'third_two_column')->first();
+//         $four_three_column = ManageSite::where('key', 'four_three_column')->first();
         $footer_setting = ManageSite::where('key', 'footer')->first();
 
-        return view('admin.setting.manage-site', compact(
+        //  $first_three_columns = json_decode($first_three_column);
+        //  $jsonString = $first_three_columns->value;
+        //   $array = json_decode($jsonString);
+        // return $appName;
+   
+            return view('admin.setting.manage-site', compact(
             'basic_setting',
             'home_page_setting',
             'media_setting',
             'seo_setting',
             'footer_setting',
             'first_three_column',
-            'second_three_column',
-            'four_three_column',
-            'third_two_column',
         ));
     }
 
@@ -137,7 +140,10 @@ class ManageSiteController extends Controller
 
         $filename2 = '';
         if ($request->file('image2')) {
-            $filename2 = $request->file('image2')->store('home_page', 'public');
+            $storefilename = $request->file('image2')->store('home_page', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         } else {
             $filename2 = $request->old_image2;
         }
@@ -155,25 +161,35 @@ class ManageSiteController extends Controller
         $manage_site->save();
         return redirect()->back()->with('success', $request->key . ' Update Successfully');
     }
+
     function first_three_column(Request $request)
     {
         $manage_site = ManageSite::where('key', $request->key)->first();
         $filename1 = '';
         if ($request->file('image1')) {
-            $filename1 = $request->file('image1')->store('home_page', 'public');
+            $storefilename_1 = $request->file('image1')->store('home_page', 'public');
+            $storefilearray=explode('/',$storefilename_1);
+            $last =count($storefilearray);
+            $filename1 =$storefilearray[$last-1];
         } else {
             $filename1 = $request->old_image1;
         }
 
         $filename2 = '';
         if ($request->file('image2')) {
-            $filename2 = $request->file('image2')->store('home_page', 'public');
+            $storefilename_2 = $request->file('image2')->store('home_page', 'public');
+            $storefilearray=explode('/',$storefilename_2);
+            $last =count($storefilearray);
+            $filename2 =$storefilearray[$last-1];
         } else {
             $filename2 = $request->old_image2;
         }
         $filename3 = '';
         if ($request->file('image3')) {
-            $filename3 = $request->file('image3')->store('home_page', 'public');
+            $storefilename_3 = $request->file('image3')->store('home_page', 'public');
+            $storefilearray=explode('/',$storefilename_3);
+            $last =count($storefilearray);
+            $filename3 =$storefilearray[$last-1];
         } else {
             $filename3 = $request->old_image3;
         }
@@ -195,114 +211,115 @@ class ManageSiteController extends Controller
         $manage_site->save();
         return redirect()->back()->with('success', $request->key . ' Update Successfully');
     }
-    function second_three_column(Request $request)
-    {
-        $manage_site = ManageSite::where('key', $request->key)->first();
-        $filename1 = '';
-        if ($request->file('image1')) {
-            $filename1 = $request->file('image1')->store('home_page', 'public');
-        } else {
-            $filename1 = $request->old_image1;
-        }
 
-        $filename2 = '';
-        if ($request->file('image2')) {
-            $filename2 = $request->file('image2')->store('home_page', 'public');
-        } else {
-            $filename2 = $request->old_image2;
-        }
-        $filename3 = '';
-        if ($request->file('image3')) {
-            $filename3 = $request->file('image3')->store('home_page', 'public');
-        } else {
-            $filename3 = $request->old_image3;
-        }
-        $value = [
-            'image1' => $filename1,
-            'image2' => $filename2,
-            'image3' => $filename3,
-            'title1' => $request->title1,
-            'title2' => $request->title2,
-            'sub_title1' => $request->sub_title1,
-            'sub_title2' => $request->sub_title2,
-            'url1' => $request->url1,
-            'title3' => $request->title3,
-            'sub_title3' => $request->sub_title3,
-            'url3' => $request->url3,
-            'url2' => $request->url2,
-        ];
-        $manage_site->value = json_encode($value);
-        $manage_site->save();
-        return redirect()->back()->with('success', $request->key . ' Update Successfully');
-    }
-    function third_two_column(Request $request)
-    {
-        $manage_site = ManageSite::where('key', $request->key)->first();
-        $filename1 = '';
-        if ($request->file('image1')) {
-            $filename1 = $request->file('image1')->store('home_page', 'public');
-        } else {
-            $filename1 = $request->old_image1;
-        }
+    // function second_three_column(Request $request)
+    // {
+    //     $manage_site = ManageSite::where('key', $request->key)->first();
+    //     $filename1 = '';
+    //     if ($request->file('image1')) {
+    //         $filename1 = $request->file('image1')->store('home_page', 'public');
+    //     } else {
+    //         $filename1 = $request->old_image1;
+    //     }
 
-        $filename2 = '';
-        if ($request->file('image2')) {
-            $filename2 = $request->file('image2')->store('home_page', 'public');
-        } else {
-            $filename2 = $request->old_image2;
-        }
-        $value = [
-            'image1' => $filename1,
-            'image2' => $filename2,
-            'title1' => $request->title1,
-            'title2' => $request->title2,
-            'sub_title1' => $request->sub_title1,
-            'sub_title2' => $request->sub_title2,
-            'url1' => $request->url1,
-            'url2' => $request->url2,
-        ];
-        $manage_site->value = json_encode($value);
-        $manage_site->save();
-        return redirect()->back()->with('success', $request->key . ' Update Successfully');
-    }
-    function four_three_column(Request $request)
-    {
-        $manage_site = ManageSite::where('key', $request->key)->first();
-        $filename1 = '';
-        if ($request->file('image1')) {
-            $filename1 = $request->file('image1')->store('home_page', 'public');
-        } else {
-            $filename1 = $request->old_image1;
-        }
+    //     $filename2 = '';
+    //     if ($request->file('image2')) {
+    //         $filename2 = $request->file('image2')->store('home_page', 'public');
+    //     } else {
+    //         $filename2 = $request->old_image2;
+    //     }
+    //     $filename3 = '';
+    //     if ($request->file('image3')) {
+    //         $filename3 = $request->file('image3')->store('home_page', 'public');
+    //     } else {
+    //         $filename3 = $request->old_image3;
+    //     }
+    //     $value = [
+    //         'image1' => $filename1,
+    //         'image2' => $filename2,
+    //         'image3' => $filename3,
+    //         'title1' => $request->title1,
+    //         'title2' => $request->title2,
+    //         'sub_title1' => $request->sub_title1,
+    //         'sub_title2' => $request->sub_title2,
+    //         'url1' => $request->url1,
+    //         'title3' => $request->title3,
+    //         'sub_title3' => $request->sub_title3,
+    //         'url3' => $request->url3,
+    //         'url2' => $request->url2,
+    //     ];
+    //     $manage_site->value = json_encode($value);
+    //     $manage_site->save();
+    //     return redirect()->back()->with('success', $request->key . ' Update Successfully');
+    // }
+    // function third_two_column(Request $request)
+    // {
+    //     $manage_site = ManageSite::where('key', $request->key)->first();
+    //     $filename1 = '';
+    //     if ($request->file('image1')) {
+    //         $filename1 = $request->file('image1')->store('home_page', 'public');
+    //     } else {
+    //         $filename1 = $request->old_image1;
+    //     }
 
-        $filename2 = '';
-        if ($request->file('image2')) {
-            $filename2 = $request->file('image2')->store('home_page', 'public');
-        } else {
-            $filename2 = $request->old_image2;
-        }
-        $filename3 = '';
-        if ($request->file('image3')) {
-            $filename3 = $request->file('image3')->store('home_page', 'public');
-        } else {
-            $filename3 = $request->old_image3;
-        }
-        $value = [
-            'image1' => $filename1,
-            'image2' => $filename2,
-            'image3' => $filename3,
-            'title1' => $request->title1,
-            'title2' => $request->title2,
-            'sub_title1' => $request->sub_title1,
-            'sub_title2' => $request->sub_title2,
-            'url1' => $request->url1,
-            'title3' => $request->title3,
-            'sub_title3' => $request->sub_title3,
-            'url3' => $request->url3,
-            'url2' => $request->url2,
-        ];
-        $manage_site->value = json_encode($value);
-        $manage_site->save();
-        return redirect()->back()->with('success', $request->key . ' Update Successfully');
-    }
+    //     $filename2 = '';
+    //     if ($request->file('image2')) {
+    //         $filename2 = $request->file('image2')->store('home_page', 'public');
+    //     } else {
+    //         $filename2 = $request->old_image2;
+    //     }
+    //     $value = [
+    //         'image1' => $filename1,
+    //         'image2' => $filename2,
+    //         'title1' => $request->title1,
+    //         'title2' => $request->title2,
+    //         'sub_title1' => $request->sub_title1,
+    //         'sub_title2' => $request->sub_title2,
+    //         'url1' => $request->url1,
+    //         'url2' => $request->url2,
+    //     ];
+    //     $manage_site->value = json_encode($value);
+    //     $manage_site->save();
+    //     return redirect()->back()->with('success', $request->key . ' Update Successfully');
+    // }
+    // function four_three_column(Request $request)
+    // {
+    //     $manage_site = ManageSite::where('key', $request->key)->first();
+    //     $filename1 = '';
+    //     if ($request->file('image1')) {
+    //         $filename1 = $request->file('image1')->store('home_page', 'public');
+    //     } else {
+    //         $filename1 = $request->old_image1;
+    //     }
+
+    //     $filename2 = '';
+    //     if ($request->file('image2')) {
+    //         $filename2 = $request->file('image2')->store('home_page', 'public');
+    //     } else {
+    //         $filename2 = $request->old_image2;
+    //     }
+    //     $filename3 = '';
+    //     if ($request->file('image3')) {
+    //         $filename3 = $request->file('image3')->store('home_page', 'public');
+    //     } else {
+    //         $filename3 = $request->old_image3;
+    //     }
+    //     $value = [
+    //         'image1' => $filename1,
+    //         'image2' => $filename2,
+    //         'image3' => $filename3,
+    //         'title1' => $request->title1,
+    //         'title2' => $request->title2,
+    //         'sub_title1' => $request->sub_title1,
+    //         'sub_title2' => $request->sub_title2,
+    //         'url1' => $request->url1,
+    //         'title3' => $request->title3,
+    //         'sub_title3' => $request->sub_title3,
+    //         'url3' => $request->url3,
+    //         'url2' => $request->url2,
+    //     ];
+    //     $manage_site->value = json_encode($value);
+    //     $manage_site->save();
+    //     return redirect()->back()->with('success', $request->key . ' Update Successfully');
+    // }
 }

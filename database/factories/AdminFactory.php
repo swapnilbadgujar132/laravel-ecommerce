@@ -27,8 +27,17 @@ class AdminFactory extends Factory
             'username' => 'Swapnil badgujar',
             'email' => 'swapnilbadgujar744@gmail.com',
             'phone' => '7666617213',
-            'image' => 'https://laravel.com/img/logomark.min.svg',
+            'image' => 'admin-img.jpg',
             'password' => Hash::make('swapnilbadgujar'),
         ];
     }
 }
+
+
+
+
+
+
+
+
+

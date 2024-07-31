@@ -39,7 +39,7 @@
                                     @foreach ($categories as $category)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset('storage') }}/{{ $category->image }}"
+                                                <img src="{{ asset('storage/category') }}/{{ $category->image }}"
                                                     alt="Image Not Found">
                                             </td>
                                             <td>

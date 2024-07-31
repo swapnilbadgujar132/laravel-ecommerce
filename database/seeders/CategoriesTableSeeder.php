@@ -15,8 +15,8 @@ class CategoriesTableSeeder extends Seeder
     {
         $data = [
             [
-                'id' => 4,
-                'image' => 'category/OXqPUDyHDf3xSuUbxCdnFMPVYE6r3yz0WGIH97YC.jpg',
+                'id' => 1,
+                'image' =>'product_0.jpg',
                 'name' => 'T-shirts',
                 'slug' => 'men-T-shirts',
                 'meta_keyword' => '[{"value":"men"},{"value":"clothing"},{"value":"t-shirt"},{"value":"brand"}]',

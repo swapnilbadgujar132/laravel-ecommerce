@@ -32,7 +32,10 @@ class CategoryController extends Controller
 
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->image->store('category', 'public');
+            $storefilename = $request->image->store('category', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         }
 
         $category = new Category();
@@ -62,8 +65,12 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('category', 'public');
-            $oldImagePath = storage_path('app/public/' . $category->image);
+            $storefilename = $request->file('image')->store('category', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
+
+            $oldImagePath = storage_path('app/public/category/' . $category->image);
             if (file_exists($oldImagePath)) {
                 unlink($oldImagePath);
             }
@@ -82,7 +89,7 @@ class CategoryController extends Controller
     function delete($id): RedirectResponse
     {
         $category = Category::findOrFail($id);
-        $path = storage_path('app/public/' . $category->image);
+        $path = storage_path('app/public/category/' . $category->image);
         if (File::exists($path)) {
             unlink($path);
         }

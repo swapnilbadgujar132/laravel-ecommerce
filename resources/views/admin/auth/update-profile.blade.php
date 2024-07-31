@@ -59,7 +59,7 @@
                                                     <label for="name">Current Image</label>
                                                     <div class="col-lg-12 pb-1">
                                                         <img class="admin-img"
-                                                            src="{{ asset('storage') }}/{{ Auth::guard('admin')->user()->image }}"
+                                                            src="{{ asset('storage/profile') }}/{{ Auth::guard('admin')->user()->image }}"
                                                             alt="No Image Found">
                                                     </div>
                                                     <span>Image Size Should Be 40 x 40.</span>

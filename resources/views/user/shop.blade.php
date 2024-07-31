@@ -28,7 +28,7 @@
                         <div class="col-lg-4">
                             <div class="product-card">
                                 <div class="product-thumb">
-                                    <img class="lazy" data-src="{{ asset('storage') }}/{{ $product->featured_image }}"
+                                    <img class="lazy" data-src="{{ asset('storage/products') }}/{{ $product->featured_image }}"
                                         alt="Product">
                                     <div class="product-button-group">
                                         @if (Auth::user() && Auth::user()->id)

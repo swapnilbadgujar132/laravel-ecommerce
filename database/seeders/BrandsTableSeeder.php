@@ -18,9 +18,9 @@ class BrandsTableSeeder extends Seeder
 
       foreach (range(1,10) as  $index) {
       Brand::create([
-        'image'=>$faker->image(),
-        'name'=>$faker->name(),
-        'slug'=>$faker->text(),
+        'image'=>'adidas.png',
+        'name'=>$faker->name,
+        'slug'=>$faker->slug,
         'status'=>true,
       ]);
       }

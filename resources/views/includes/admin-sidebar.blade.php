@@ -9,7 +9,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="{{ asset('storage') }}/{{ $setting_value->logo }}"
+                    <img src="{{ asset('storage/manage-site') }}/{{ $setting_value->logo }}"
                         alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">

@@ -39,28 +39,29 @@
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="payment-methods">
+
+                                    
                                     <div class="single-payment-method">
-                                        <a class="text-decoration-none" href="{{route("stripe.post")}}" >
-                                            {{-- data-bs-toggle="modal"
-                                            data-bs-target="#stripe" --}}
+                                        <a class="text-decoration-none" href="#" 
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#bank">
                                             <img class=""
-                                                src="https://geniusdevs.com/codecanyon/omnimart40/assets/images/1601930611stripe-logo-blue.png"
+                                                src="https://static.vecteezy.com/system/resources/previews/042/882/469/non_2x/3d-illustration-bank-building-png.png"
                                                 alt="Stripe" title="Stripe">
-                                            <p>Stripe</p>
+                                            <p>bank</p>
                                         </a>
                                     </div>
-                                    <div class="single-payment-method">
-                                        {{-- href="{{route("phonepay.index")}}" --}}
+
+                                    {{-- <div class="single-payment-method">
                                         <a class="text-decoration-none" href="{{route("phonepay.index")}}">
-                                        {{-- <a class="text-decoration-none " href="#" data-bs-toggle="modal" data-bs-target="#bank"> --}}
                                             <img class=""
                                                 src="https://pbs.twimg.com/profile_images/1615271089705463811/v-emhrqu_400x400.png"
                                                 alt="Phone pay" title="Phone pay">
                                             <p>Phone Pay</p>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                    
-                                    {{-- <div class="single-payment-method">
+                                    <div class="single-payment-method">
                                         <a class="text-decoration-none " href="#" data-bs-toggle="modal"
                                             data-bs-target="#cod">
                                             <img class=""
@@ -69,7 +70,7 @@
                                             <p>Cash on Delivery</p>
                                             
                                         </a>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="single-payment-method">
                                         <form id="myForm" action="{{ route('paypal') }}" method="post">
@@ -127,7 +128,7 @@
                     </div>
                 </div>
                 <!-- Modal Stripe -->
-                <div class="modal fade" id="stripe" tabindex="-1" aria-hidden="true">
+                {{-- <div class="modal fade" id="stripe" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -138,7 +139,7 @@
                             <div class="modal-body">
                                 <div class="card-body">
                                     <div class="card-wrapper"></div>
-                                    {{-- <form role="form" action="{{ route("user.checkout.stripe") }}" method="post"
+                                    <form role="form" action="{{ route("user.checkout.stripe") }}" method="post"
                                         class="require-validation" data-cc-on-file="false"
                                         data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                         @csrf
@@ -168,14 +169,14 @@
                                             <button class="btn btn-primary btn-sm" type="submit"><span>Chekout With
                                                     Stripe</span></button>
                                         </div>
-                                    </form> --}}
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="modal fade" id="flutterwave" tabindex="-1" aria-hidden="true">
+                {{-- <div class="modal fade" id="flutterwave" tabindex="-1" aria-hidden="true">
                     <form class="interactive-credit-card row"
                         action="https://geniusdevs.com/codecanyon/omnimart40/flutterwave/submit" method="POST">
                         <input type="hidden" name="_token" value="sXahNV8HiLbT9glsyMxedbtDGJmeA8qZf5UfwM7k">
@@ -204,7 +205,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
 
                 <!-- Modal bank -->
                 <div class="modal fade" id="bank" tabindex="-1" aria-hidden="true">

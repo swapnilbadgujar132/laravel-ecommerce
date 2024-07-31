@@ -39,7 +39,7 @@
                                     @foreach ($brands as $brand)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset('storage') }}/{{ $brand->image }}" alt="Image Not Found">
+                                                <img src="{{ asset('storage/brand') }}/{{ $brand->image }}" alt="Image Not Found">
                                             </td>
                                             <td>
                                                 {{ $brand->name }}

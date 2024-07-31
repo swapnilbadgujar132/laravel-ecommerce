@@ -35,7 +35,7 @@
                                     @foreach ($products as $product)
                                         <tr id="product-bulk-delete">
                                             <td>
-                                                <img src="{{ asset('storage') }}/{{ $product->featured_image }}"
+                                                <img src="{{ asset('storage/products') }}/{{ $product->featured_image }}"
                                                     alt="Image Not Found">
                                             </td>
                                             <td>

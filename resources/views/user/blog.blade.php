@@ -27,7 +27,7 @@
                             class="blog-post">
                             <div class="post-thumb">
                                 <img class="lazy" alt="Blog Post"
-                                    src="{{ asset('storage') }}/{{ $blog->image }}"
+                                    src="{{ asset('storage/blog') }}/{{ $blog->image }}"
                                     style="">
                             </div>
                             <div class="post-body">
@@ -35,7 +35,6 @@
                                 <h3 class="post-title"> {{ $blog->title }}
                                 </h3>
                                 <ul class="post-meta">
-
                                     <li><i class="icon-user"></i>Admin</li>
                                     <li><i class="icon-clock"></i>{{ \Carbon\Carbon::now()->format('Y, M d',strtotime($blog->created_at)) }}</li>
                                 </ul>
@@ -48,7 +47,7 @@
                    
                 </div>
             </div>
-            <!-- Sidebar          -->
+            <!-- Sidebar          --> 
           @include('includes.blog-sidebar')
 
         </div>

@@ -38,7 +38,7 @@
                                                 <br>
                                                 @if ($category->image)
                                                     <img class="admin-img"
-                                                        src="{{ asset('storage') }}/{{ $category->image }}"
+                                                        src="{{ asset('storage/category') }}/{{ $category->image }}"
                                                         alt="{{ $category->name }}">
                                                 @else
                                                     <img class="admin-img"

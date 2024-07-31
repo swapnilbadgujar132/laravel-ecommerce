@@ -35,7 +35,7 @@
                                             <div class="form-group">
                                                 <label for="name">Set Image *</label>
                                                 <br>
-                                                <img class="admin-img" src="{{ asset('storage') }}/{{ $blog->image }}"
+                                                <img class="admin-img" src="{{ asset('storage/blog') }}/{{ $blog->image }}"
                                                     alt="No Image Found">
                                                 <br>
                                                 <span class="mt-1">Image Size Should Be 708 x 277.</span>

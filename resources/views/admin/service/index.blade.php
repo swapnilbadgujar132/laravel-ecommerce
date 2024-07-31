@@ -40,7 +40,7 @@
                                     @foreach ($services as $service)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset('storage') }}/{{ $service->image }}"
+                                                <img src="{{ asset('storage/service') }}/{{ $service->image }}"
                                                     alt="Image Not Found">
                                             </td>
                                             <td>

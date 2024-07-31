@@ -30,7 +30,10 @@ class ServiceController extends Controller
 
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('service', 'public');
+            $storefilename = $request->file('image')->store('service', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         }
         $service = new Service();
         $service->image = $filename;
@@ -54,7 +57,10 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $filename = $service->image;
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('service', 'public');
+            $storefilename = $request->file('image')->store('service', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         }
 
         $service->image = $filename;
@@ -66,7 +72,7 @@ class ServiceController extends Controller
     function delete($id): RedirectResponse
     {
         $service = Service::findOrFail($id);
-        $path = public_path('storage\\' . $service->image);
+        $path = public_path('storage/service/'.$service->image);
         if (File::exists($path)) {
             File::delete($path);
         }

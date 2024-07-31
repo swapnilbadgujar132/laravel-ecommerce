@@ -14,10 +14,11 @@ class CustomerController extends Controller
         return view('admin.customer.index',compact('users'));
     }
 
-    function edit($id)  {
+    function edit($id){
         $user=User::findOrFail($id);
         return view('admin.customer.update',compact('user'));
     }
+
     function update(Request $request,$id)  {
         $user=User::findOrFail($id);
         $user->name=$request->first_name .' '.$request->last_name; 
@@ -27,6 +28,7 @@ class CustomerController extends Controller
         $user->save();
         return redirect()->route('admin.customer')->with('success','User update successufully');
     }
+
     function delete($id)  {
         $user=User::findOrFail($id)->delete();
         return redirect()->back()->with('success','User delete successfully');

@@ -4,16 +4,40 @@
 @endsection
 @section('content')
     @php
-        $basic_value = json_decode($basic_setting->value);
-        $home_page_value = json_decode($home_page_setting->value);
-        $first_three_column_value = json_decode($first_three_column->value);
-        $second_three_column_value = json_decode($second_three_column->value);
-        $four_three_column_value = json_decode($four_three_column->value);
-        $third_two_column_value = json_decode($third_two_column->value);
-        $media_value = json_decode($media_setting->value);
-        $seo_value = json_decode($seo_setting->value);
-        $footer_value = json_decode($footer_setting->value);
+        $basic_values = json_decode($basic_setting);
+        $values = $basic_values->value;
+        $value = json_decode($values);
+        $appName = $value->app_name;
+
+        $home_page_title = $value->home_page_title;
+        
+        $home_page_values = json_decode($home_page_setting);
+        $values=$home_page_values->value;
+        $home_page_value=json_decode($values);
+
+        $first_three_columns = json_decode($first_three_column);
+         $jsonString = $first_three_columns->value;
+          $first_three_column_value = json_decode($jsonString);
+
+        // $second_three_column_value = json_decode($second_three_column);
+        // $four_three_column_value = json_decode($four_three_column);
+        // $third_two_column_value = json_decode($third_two_column);
+        $media_values = json_decode($media_setting);
+          $values=$media_values->value;
+          $media_value=json_decode($values);
+
+        $seo_values = json_decode($seo_setting);
+        $values=$seo_values->value;
+        $value=json_decode($values);
+        $meta_keywords = $value->meta_keyword;
+        $meta_description = $value->meta_description;
+        // $meta_keywords = json_decode($value->meta_keyword,true);
+        
+        $footer_settings = json_decode($footer_setting);
+         $jsonString = $footer_settings->value;
+         $footer_value = json_decode($jsonString);
     @endphp
+
     <div class="content">
         <div class="page-inner">
             <!-- Start of Main Content -->
@@ -52,10 +76,6 @@
                                                 <a class="nav-link" data-toggle="pill" href="#media">Media</a>
                                                 <a class="nav-link" data-toggle="pill" href="#seo">Seo</a>
                                                 <a class="nav-link" data-toggle="pill" href="#ftc">First Three Column</a>
-                                                <a class="nav-link" data-toggle="pill" href="#stc">Second Three
-                                                    Column</a>
-                                                <a class="nav-link" data-toggle="pill" href="#ttc">Thrid Two Column</a>
-                                                <a class="nav-link" data-toggle="pill" href="#ftc1">Four Three Column</a>
                                                 <a class="nav-link" data-toggle="pill" href="#footer">Footer &amp; Contact
                                                     Page</a>
                                             </div>
@@ -74,7 +94,7 @@
                                                                         <div class="form-group">
                                                                             <label for="title">App Name *</label>
                                                                             <input type="text" name="app_name"
-                                                                                value="{{ $basic_value->app_name }}"
+                                                                                value="{{ $appName }}"
                                                                                 class="form-control" id="app_name"
                                                                                 placeholder="Enter Website App_name">
                                                                             <input type="hidden" name="key"
@@ -89,7 +109,7 @@
                                                                                 *</label>
                                                                             <input type="text" name="home_page_title"
                                                                                 class="form-control" id="home_page_title"
-                                                                                value="{{ $basic_value->home_page_title }}"
+                                                                                value="{{ $home_page_title }}"
                                                                                 placeholder="Enter Home Page Title">
                                                                         </div>
                                                                     </div>
@@ -111,7 +131,7 @@
                                                                     <label for="name">Image 1 *</label>
                                                                     <br>
                                                                     <img class="admin-img"
-                                                                        src="{{ asset('storage') }}/{{ $home_page_value->image1 }}"
+                                                                        src="{{ asset('storage/home_page_two_image') }}/{{ $home_page_value->image1 }}"
                                                                         alt="No Image Found">
                                                                     <br>
                                                                     <span class="mt-1">Image Size Should Be 496 x
@@ -154,7 +174,7 @@
                                                                     <label for="name">Image 1 *</label>
                                                                     <br>
                                                                     <img class="admin-img"
-                                                                        src="{{ asset('storage') }}/{{ $home_page_value->image2 }}"
+                                                                        src="{{ asset('storage/home_page_two_image') }}/{{ $home_page_value->image2 }}"
                                                                         alt="No Image Found">
                                                                     <br>
                                                                     <span class="mt-1">Image Size Should Be 496 x
@@ -241,7 +261,7 @@
                                                                                                 Image</label>
                                                                                             <div class="col-lg-12 pb-1">
                                                                                                 <img class="admin-setting-img"
-                                                                                                    src="{{ asset('storage') }}/{{ $media_value->logo }}"
+                                                                                                    src="{{ asset('storage/manage-site') }}/{{ $media_value->logo }}"
                                                                                                     alt="No Image Found">
                                                                                             </div>
                                                                                             <span>Image Size Should Be 140 x
@@ -284,7 +304,7 @@
                                                                                                 Image</label>
                                                                                             <div class="col-lg-12 pb-1">
                                                                                                 <img class="admin-setting-img my-mw-100"
-                                                                                                    src="{{ asset('storage') }}/{{ $media_value->favicon }}"
+                                                                                                    src="{{ asset('storage/manage-site') }}/{{ $media_value->favicon }}"
                                                                                                     alt="No Image Found">
                                                                                             </div>
                                                                                             <span>Image Size Should Be 16 x
@@ -338,7 +358,7 @@
                                                                                                 Image</label>
                                                                                             <div class="col-lg-12 pb-1">
                                                                                                 <img class="admin-setting-img my-mw-100"
-                                                                                                    src="{{ asset('storage') }}/{{ $media_value->loader }}"
+                                                                                                    src="{{ asset('storage/loader') }}/{{ $media_value->loader }}"
                                                                                                     alt="No Image Found">
                                                                                             </div>
                                                                                         </div>
@@ -388,7 +408,7 @@
                                                                             <input type="text" name="meta_keyword"
                                                                                 class="tags" id="meta_keyword"
                                                                                 placeholder="Site Meta Keywords"
-                                                                                value="{{ $seo_value->meta_keyword }}">
+                                                                                value="{{ $meta_keywords }}">
                                                                         </div>
 
                                                                         <div class="form-group">
@@ -396,7 +416,7 @@
                                                                                 Description
                                                                                 *</label>
                                                                             <textarea name="meta_description" id="meta_description" class="form-control" rows="5"
-                                                                                placeholder="Enter Site Meta Description">{{ $seo_value->meta_description }}</textarea>
+                                                                                placeholder="Enter Site Meta Description">{{ $meta_description }}</textarea>
                                                                         </div>
 
                                                                     </div>
@@ -534,7 +554,7 @@
                                                                     <label for="name">Image 1 *</label>
                                                                     <br>
                                                                     <img class="admin-img"
-                                                                        src="{{ asset('storage') }}/{{ $first_three_column_value->image1 }}"
+                                                                        src="{{ asset('storage/three_column_value') }}/{{ $first_three_column_value->image1 }}"
                                                                         alt="No Image Found">
                                                                     <br>
                                                                     <span class="mt-1">Image Size Should Be 496 x
@@ -577,7 +597,7 @@
                                                                     <label for="name">Image 2 *</label>
                                                                     <br>
                                                                     <img class="admin-img"
-                                                                        src="{{ asset('storage') }}/{{ $first_three_column_value->image2 }}"
+                                                                        src="{{ asset('storage/three_column_value') }}/{{ $first_three_column_value->image2 }}"
                                                                         alt="No Image Found">
                                                                     <br>
                                                                     <span class="mt-1">Image Size Should Be 496 x
@@ -619,7 +639,7 @@
                                                                     <label for="name">Image 3 *</label>
                                                                     <br>
                                                                     <img class="admin-img"
-                                                                        src="{{ asset('storage') }}/{{ $first_three_column_value->image3 }}"
+                                                                        src="{{ asset('storage/three_column_value') }}/{{ $first_three_column_value->image3 }}"
                                                                         alt="No Image Found">
                                                                     <br>
                                                                     <span class="mt-1">Image Size Should Be 496 x
@@ -673,7 +693,7 @@
                                                             </form>
                                                         </div>
 
-                                                        <div id="stc" class="tab-pane"><br>
+                                                        {{-- <div id="stc" class="tab-pane"><br>
 
                                                             <form
                                                                 action="{{ route('admin.manage-site.second_three_column') }}"
@@ -971,8 +991,9 @@
                                                                         class="btn btn-secondary ">Submit</button>
                                                                 </div>
                                                             </form>
-                                                        </div>
-                                                        <div id="ttc" class="tab-pane"><br>
+                                                        </div> --}}
+                                                        
+                                                        {{-- <div id="ttc" class="tab-pane"><br>
                                                             <form
                                                                 action="{{ route('admin.manage-site.third_two_column') }}"
                                                                 method="post" enctype="multipart/form-data">
@@ -1075,7 +1096,7 @@
                                                                         class="btn btn-secondary ">Submit</button>
                                                                 </div>
                                                             </form>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>

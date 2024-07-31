@@ -11,7 +11,7 @@
                     <div class="hero-slider">
                         <div class="hero-slider-main owl-carousel dots-inside">
                             @foreach ($sliders as $slider)
-                                <div class="item" style="background: url('{{ asset('storage') }}/{{ $slider->image }}')">
+                                <div class="item" style="background: url('{{ asset('storage/slider') }}/{{ $slider->image }}')">
                                     <div class="item-inner">
                                         <div class="from-bottom">
                                             <div class="title text-body">{{ $slider->title }}</div>
@@ -30,7 +30,7 @@
 
                 <div class="col-lg-4 d-none d-lg-block">
                     <a href="#" class="sright-image">
-                        <img src="{{ asset('storage') }}/{{ $home_page_value->image1 }}" alt="">
+                        <img src="{{ asset('storage/home_page_two_image') }}/{{ $home_page_value->image1 }}" alt="">
                         <div class="inner-content">
 
                             <p>{{ $home_page_value->title1 }}</p>
@@ -39,7 +39,7 @@
                         </div>
                     </a>
                     <a href="#" class="sright-image">
-                        <img src="{{ asset('storage') }}/{{ $home_page_value->image2 }}" alt="">
+                        <img src="{{ asset('storage/home_page_two_image') }}/{{ $home_page_value->image2 }}" alt="">
                         <div class="inner-content">
 
                             <p>{{ $home_page_value->title2 }}</p>
@@ -60,7 +60,7 @@
                 @foreach ($services as $service)
                     <div class="col-lg-3 col-sm-6 text-center mb-30">
                         <div class="single-service single-service2">
-                            <img src="{{ asset('storage') }}/{{ $service->image }}" alt="Shipping">
+                            <img src="{{ asset('storage/service') }}/{{ $service->image }}" alt="Shipping">
                             <div class="content ml-3">
                                 <h6 class="mb-2 ">{{ $service->title }}</h6>
                                 <p class="text-sm text-muted mb-0">{{ $service->sub_title }}</p>
@@ -95,7 +95,7 @@
                                 <div class="product-card">
                                     <div class="product-thumb">
                                         <img class="lazy"
-                                            data-src="{{ asset('storage') }}/{{ $product->featured_image }}"
+                                            data-src="{{ asset('storage/products') }}/{{ $product->featured_image }}"
                                             alt="Product">
                                         <div class="product-button-group">
                                             @if (Auth::user() && Auth::user()->id)
@@ -158,16 +158,17 @@
             <div class="row gx-3">
                 <div class="col-md-4">
                     <a href="#" class="genius-banner">
-                        <img src="{{ asset('storage') }}/{{ $first_three_column_value->image1 }}" alt="">
+                        <img src="{{ asset('storage/three_column_value') }}/{{ $first_three_column_value->image1 }}" alt="">
                         <div class="inner-content">
                             <p>{{ $first_three_column_value->title1 }}</p>
                             <h4>{{ $first_three_column_value->sub_title1 }}</h4>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-md-4">
                     <a href="#" class="genius-banner">
-                        <img src="{{ asset('storage') }}/{{ $first_three_column_value->image2 }}" alt="">
+                        <img src="{{ asset('storage/three_column_value') }}/{{ $first_three_column_value->image2 }}" alt="">
                         <div class="inner-content">
                             <p>{{ $first_three_column_value->title2 }}</p>
                             <h4>{{ $first_three_column_value->sub_title2 }}</h4>
@@ -176,13 +177,14 @@
                 </div>
                 <div class="col-md-4">
                     <a href="#" class="genius-banner">
-                        <img src="{{ asset('storage') }}/{{ $first_three_column_value->image3 }}" alt="">
+                        <img src="{{ asset('storage/three_column_value') }}/{{ $first_three_column_value->image3 }}" alt="">
                         <div class="inner-content">
                             <p>{{ $first_three_column_value->title3 }}</p>
                             <h4>{{ $first_three_column_value->sub_title3 }}</h4>
                         </div>
                     </a>
                 </div>
+
             </div>
         </div>
     </div>

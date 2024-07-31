@@ -29,7 +29,10 @@ class ProfileController extends Controller
         $admin = Admin::findOrFail(Auth::guard('admin')->user()->id);
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('admin/profile/image', 'public');
+            $storefilename = $request->file('image')->store('admin/profile/image', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         } else {
             $filename = $admin->image;
         }

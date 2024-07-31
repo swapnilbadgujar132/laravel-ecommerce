@@ -78,7 +78,10 @@ class LoginController extends Controller
 
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('profile', 'public');
+            $storefilename = $request->file('image')->store('profile', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         } else {
             $filename = $admin->image;
         }

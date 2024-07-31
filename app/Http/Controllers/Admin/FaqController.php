@@ -52,5 +52,4 @@ class FaqController extends Controller
         Faq::findOrFail($id)->delete();
         return redirect()->route('admin.faq.index')->with('success', 'Faq  delete successfully');
     }
- 
 }

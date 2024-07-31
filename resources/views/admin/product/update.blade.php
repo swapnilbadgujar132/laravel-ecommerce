@@ -53,7 +53,7 @@
                                         <label class="d-block">Featured Image *</label>
                                     </div>
                                     <div class="form-group pb-0 pt-0 mt-0 mb-0">
-                                        <img class="admin-img lg" src="{{ asset('storage') }}/{{ $product->featured_image }}">
+                                        <img class="admin-img lg" src="{{ asset('storage/products') }}/{{ $product->featured_image }}">
                                     </div>
                                     <div class="form-group position-relative ">
                                         <label class="file">

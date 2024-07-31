@@ -18,7 +18,7 @@ class ServicesTableSeeder extends Seeder
 
         foreach (range(1, 10) as $index) {
             Service::create([
-                'image'=>public_path('media/3489823-min_1702376212.jpg'),
+                'image'=>'service.gif',
                 'title' => $faker->sentence(),
                 'details' => $faker->paragraph(),
             ]);

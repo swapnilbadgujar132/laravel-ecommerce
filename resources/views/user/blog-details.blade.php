@@ -26,7 +26,7 @@
                         <div class="owl-stage-outer">
                             <div class="">
                                 <div class="owl-item cloned" style="width: 831px;"><img
-                                        src="{{ asset('storage') }}/{{ $blog->image }}" alt="Image"></div>
+                                        src="{{ asset('storage/blog') }}/{{ $blog->image }}" alt="Image"></div>
 
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                     $tags = json_decode($tags);
                                 @endphp
                                 @foreach ($tags as $tag)
-                                    <a class="text-sm text-muted navi-link">{{ $tag->value }}</a>,
+                                    <a class="text-sm text-muted navi-link">{{ $tag }}</a>,
                                 @endforeach
                             </div>
                         </div>

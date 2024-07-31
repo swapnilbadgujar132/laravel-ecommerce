@@ -21,7 +21,7 @@ class SliderTableSeeder extends Seeder
         'title'=>$faker->title(),
         'details'=>$faker->text(),
         'url'=>$faker->url(),
-        'image'=>'category/3489823-min_1702376212.jpg',
+        'image'=> 'slider_image.jpg',
        ]);
      }
     }

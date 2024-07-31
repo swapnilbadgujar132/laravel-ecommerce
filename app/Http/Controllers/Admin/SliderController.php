@@ -31,7 +31,10 @@ class SliderController extends Controller
 
         $filename = '';
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('slider', 'public');
+            $storefilename = $request->file('image')->store('slider', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         }
         $slider = new Slider();
         $slider->image = $filename;
@@ -58,7 +61,10 @@ class SliderController extends Controller
         $slider = Slider::findOrFail($id);
         $filename = $slider->image;
         if ($request->file('image')) {
-            $filename = $request->file('image')->store('slider', 'public');
+            $storefilename = $request->file('image')->store('slider', 'public');
+            $storefilearray=explode('/',$storefilename);
+            $last =count($storefilearray);
+            $filename =$storefilearray[$last-1];
         }
 
         $slider->image = $filename;
@@ -71,7 +77,7 @@ class SliderController extends Controller
     function delete($id): RedirectResponse
     {
         $slider = Slider::findOrFail($id);
-        $path = public_path('storage\\' . $slider->image);
+        $path = public_path('storage/slider/' . $slider->image);
         if (File::exists($path)) {
             File::delete($path);
         }

@@ -226,7 +226,7 @@
                                             <div class="entry">
                                                 <div class="entry-thumb"><a
                                                         href="{{ route('user.product_details', ['slug'=>$cart->product->slug]) }}"><img
-                                                            src="{{ asset('storage') }}/{{ $cart->product->featured_image }}"
+                                                            src="{{ asset('storage/products') }}/{{ $cart->product->featured_image }}"
                                                             alt="Product"></a></div>
                                                 <div class="entry-content">
                                                     <h4 class="entry-title"><a
@@ -377,7 +377,7 @@
                                         <a class="d-block navi-link"
                                             href="/shop/category/{{ $category->id }}">
                                             <img class="lazy"
-                                                data-src="{{ asset('storage') }}/{{ $category->image }}">
+                                                data-src="{{ asset('storage/category') }}/{{ $category->image }}">
                                             <span class="text-gray-dark">{{ $category->name }}</span>
                                             <i class="icon-chevron-right"></i>
                                         </a>

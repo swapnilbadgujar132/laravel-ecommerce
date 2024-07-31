@@ -42,7 +42,7 @@
                                             <div class="product-item">
                                                 <a class="product-thumb"
                                                     href="{{ route('user.product_details', ['slug' => $cart->product->slug]) }}"><img
-                                                        src="{{ asset('storage') }}/{{ $cart->product->featured_image }}"
+                                                        src="{{ asset('storage/products') }}/{{ $cart->product->featured_image }}"
                                                         alt="Product">
                                                 </a>
                                                 <div class="product-info">
